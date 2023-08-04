@@ -1,18 +1,25 @@
 import { useState } from "react";
 
+import { useLogin } from "../hooks/useLogin";
+
 const Login = () => {
+  const { login, error, isLoading } = useLogin();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(email, password);
+    await login(email, password);
+
+    setEmail("");
+    setPassword("");
   };
 
   return (
     <form className="login" onSubmit={handleSubmit}>
-      <h3>Sign Up</h3>
+      <h3>Login</h3>
 
       <label>Email address:</label>
       <input
